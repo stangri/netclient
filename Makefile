@@ -29,7 +29,7 @@ include ../../lang/golang/golang-package.mk
 define Package/netclient
   SECTION:=net
   CATEGORY:=Network
-  URL:=https://docs.openwrt.melmac.net/netclient/
+  URL:=https://github.com/stangri/netclient/
   TITLE:=netclient
   DEPENDS:=$(GO_ARCH_DEPENDS) +wireguard-tools
 	DEPENDS+=+!BUSYBOX_DEFAULT_AWK:gawk
