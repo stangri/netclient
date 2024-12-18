@@ -4,12 +4,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=netclient
-PKG_VERSION:=0.24.1
+PKG_VERSION:=0.30.0
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/gravitl/netclient/tar.gz/v$(PKG_VERSION)?
-PKG_HASH:=971d91a54fb4c67bda37f9747aeb872ec520ed23d1213f795536a7066fe65186
+PKG_HASH:=e86c25bca0dda02eb5207a64d7251017faeb9c00a45c4300237956aa5a6a7815
 
 PKG_MAINTAINER:=Stan Grishin <stangri@melmac.ca>
 PKG_LICENSE:=Apache-2.0
@@ -21,7 +21,7 @@ PKG_BUILD_FLAGS:=no-mips16
 
 GO_PKG:=github.com/gravitl/netclient
 GO_PKG_BUILD_PKG:=github.com/gravitl/netclient
-GO_PKG_LDFLAGS_X:=main.version=v$(PKG_VERSION)
+GO_PKG_LDFLAGS_X:=main.version=$(PKG_VERSION)-r$(PKG_RELEASE)
 
 include $(INCLUDE_DIR)/package.mk
 include $(TOPDIR)/feeds/packages/lang/golang/golang-package.mk
