@@ -33,7 +33,7 @@ proto_netclient_setup() {
 	local config="$1"
 	local interface="$2"
 	local device key
-	local addresses address port
+	local addresses address port subnet
 
 	json_get_vars device key
 	device="${device:-$interface}"
@@ -49,11 +49,13 @@ proto_netclient_setup() {
 		exit 1
 	}
 
+	sleep 5
+	"$PROG" pull >/dev/null 2>&1
+	sleep 2
 	proto_init_update  "$config" 1
 #	proto_run_command "$config" "$PROG" daemon
 
 	"$WG" show "$config" >/dev/null 2>&1 || {
-		sleep 5
 		logger -t 'netclient' "Failed to set up ($interface :: $config :: $device)"
 		proto_setup_failed "$config"
 		exit 1
@@ -67,12 +69,16 @@ proto_netclient_setup() {
 				;;
 			*.*/*)
 				proto_add_ipv4_address "${address%%/*}" "${address##*/}"
+				subnet="$(ipcalc.sh "${address%%/*}/24" | grep NETWORK | cut -d= -f2)"
+				proto_add_ipv4_route "${subnet}" "24" "${address%%/*}"
 				;;
 			*:*)
 				proto_add_ipv6_address "${address%%/*}" "128"
 				;;
 			*.*)
 				proto_add_ipv4_address "${address%%/*}" "32"
+				subnet="$(ipcalc.sh "${address%%/*}/24" | grep NETWORK | cut -d= -f2)"
+				proto_add_ipv4_route "${subnet}" "24" "${address%%/*}"
 				;;
 		esac
 	done
