@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=netclient
 PKG_VERSION:=0.30.0
-PKG_RELEASE:=2
+PKG_RELEASE:=4
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/gravitl/netclient/tar.gz/v$(PKG_VERSION)?
@@ -59,13 +59,13 @@ define Package/netclient/install
 endef
 
 define Package/netclient/prerm
-	#!/bin/sh
-	# check if we are on real system
-	if [ -z "$${IPKG_INSTROOT}" ]; then
-		ifdown netmaker
-		uci -q del network.netmaker || true
-	fi
-	exit 0
+#!/bin/sh
+# check if we are on real system
+if [ -z "$${IPKG_INSTROOT}" ]; then
+	ifdown netmaker
+	uci -q del network.netmaker || true
+fi
+exit 0
 endef
 
 $(eval $(call GoBinPackage,netclient))
