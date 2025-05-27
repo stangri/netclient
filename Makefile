@@ -1,5 +1,5 @@
-# Copyright 2024 MOSSDeF, Stan Grishin (stangri@melmac.ca).
-# This is free software, licensed under the Apache-2.0 License.
+# SPDX-Identifier-License: Apache-2.0
+# Copyright 2024-2025 MOSSDeF, Stan Grishin (stangri@melmac.ca).
 
 include $(TOPDIR)/rules.mk
 
