@@ -1,4 +1,4 @@
-# SPDX-Identifier-License: Apache-2.0
+# SPDX-License-Identifier: Apache-2.0
 # Copyright 2024-2025 MOSSDeF, Stan Grishin (stangri@melmac.ca).
 
 include $(TOPDIR)/rules.mk
